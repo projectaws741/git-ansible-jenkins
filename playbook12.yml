@@ -9,8 +9,8 @@
       update_cache: yes
    - name: Edit the idnex.html file
      copy:
-      dest: /var/www/html/index.html
       content: "IntelliQIt"
+      dest: /var/www/html/index.html
    - name: Restart apache2
      service:
       name: apache2

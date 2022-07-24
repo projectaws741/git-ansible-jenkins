@@ -1,0 +1,26 @@
+---
+- name: Configuring apache2
+  hosts: all
+  tasks:
+   - name: Install apache2
+     apt:
+      name: apache2
+      state: present
+      update_cache: yes
+   - name: Edit the idnex.html file
+     copy:
+      dest: /var/www/html/index.html
+      content: "IntelliQIt"
+   - name: Restart apache2
+     service:
+      name: apache2
+      state: restarted
+   - name: Check apache2 on all managed nodes
+     uri:
+      url: "{{item}}"
+      status_code: 200
+     with_items:
+      - http://172.31.87.133
+      - http://172.31.93.97
+
+...

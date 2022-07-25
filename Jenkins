@@ -1,0 +1,21 @@
+pipeline
+{
+    agent any
+    stages
+    {
+        stage('DOWNLOAD PLAYBOOK')
+        {
+            steps
+            {
+                git branch: 'main', url: 'https://github.com/projectaws741/git-ansible-jenkins.git'
+            }
+        }
+        stage('Execute plaubook')
+        {
+            steps
+            {
+                ansiblePlaybook credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'Ansible', inventory: 'dev.inv', playbook: 'playbook12.yml'
+            }
+        }
+    }
+}
